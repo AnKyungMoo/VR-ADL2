@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerGrabObject : MonoBehaviour {
+public class ControllerGrabObject : MonoBehaviour
+{
+    [SerializeField] private AudioSource _audioSource = null;
 
     private SteamVR_TrackedObject trackedObj;
     private GameObject collidingObject;
     private GameObject objectInHand;
+
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
@@ -84,7 +87,11 @@ public class ControllerGrabObject : MonoBehaviour {
     {
         if (Controller.GetHairTriggerDown())
         {
-            if (collidingObject)
+            if (collidingObject.name.Equals("StartButton"))
+            {
+                Invoke("StartRing", 2);
+            }
+            else if (collidingObject)
             {
                 GrabObject();
             }
@@ -97,6 +104,11 @@ public class ControllerGrabObject : MonoBehaviour {
             }
         }
 
+    }
+
+    private void StartRing()
+    {
+        _audioSource.Play();
     }
 
 }

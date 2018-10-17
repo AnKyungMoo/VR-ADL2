@@ -6,6 +6,7 @@ using UnityEngine;
 public class ControllerGrabObject : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private VibrateObject _vibrateObject = null;
 
     private SteamVR_TrackedObject trackedObj;
     private GameObject collidingObject;
@@ -89,6 +90,7 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if (collidingObject.name.Equals("StartButton"))
             {
+                _vibrateObject.Shake();
                 Invoke("StartRing", 2);
             }
             else if (collidingObject)

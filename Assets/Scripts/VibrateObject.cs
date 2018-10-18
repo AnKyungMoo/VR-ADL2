@@ -33,6 +33,11 @@ public class VibrateObject : MonoBehaviour
                 _originRotation.w + Random.Range(-tempShakeIntensity, tempShakeIntensity) * .2f);
             tempShakeIntensity -= shakeDecay;
         }
+        else if (tempShakeIntensity < 0)
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+            tempShakeIntensity = 0;
+        }
     }
 
     public void Shake()

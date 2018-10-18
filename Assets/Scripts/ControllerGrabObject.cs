@@ -95,6 +95,10 @@ public class ControllerGrabObject : MonoBehaviour
             }
             else if (collidingObject)
             {
+                if (collidingObject.name.Equals("Receiver"))
+                {
+                    _audioSource.Stop();
+                }
                 GrabObject();
             }
         }

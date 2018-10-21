@@ -6,11 +6,12 @@ public class VibrateObject : MonoBehaviour
 {
     private Vector3 _originPosition;
     private Quaternion _originRotation;
-    public float shakeDecay = 0.002f;
-    public float shakeIntensity = .3f;
+    public float shakeDecay = 0.00002f;
+    public float shakeTime = .3f;
+    public float shakeStrength = 0.02f;
 
-    private float tempShakeIntensity = 0;
-
+    private float tempShakeTime = 0;
+    
     /*
     void OnGUI()
     {
@@ -23,20 +24,20 @@ public class VibrateObject : MonoBehaviour
 
     void Update()
     {
-        if (tempShakeIntensity > 0)
+        if (tempShakeTime > 0)
         {
-            transform.position = _originPosition + Random.insideUnitSphere * tempShakeIntensity;
+            //transform.position = _originPosition + Random.insideUnitSphere * tempShakeIntensity;
             transform.rotation = new Quaternion(
-                _originRotation.x + Random.Range(-tempShakeIntensity, tempShakeIntensity) * .2f,
-                _originRotation.y + Random.Range(-tempShakeIntensity, tempShakeIntensity) * .2f,
-                _originRotation.z + Random.Range(-tempShakeIntensity, tempShakeIntensity) * .2f,
-                _originRotation.w + Random.Range(-tempShakeIntensity, tempShakeIntensity) * .2f);
-            tempShakeIntensity -= shakeDecay;
+                _originRotation.x + Random.Range(-shakeStrength, shakeStrength) * .2f,
+                _originRotation.y + Random.Range(-shakeStrength, shakeStrength) * .2f,
+                _originRotation.z + Random.Range(-shakeStrength, shakeStrength) * .2f,
+                _originRotation.w + Random.Range(-shakeStrength, shakeStrength) * .2f);
+            tempShakeTime -= shakeDecay;
         }
-        else if (tempShakeIntensity < 0)
+        else if (tempShakeTime < 0)
         {
             gameObject.GetComponent<AudioSource>().Play();
-            tempShakeIntensity = 0;
+            tempShakeTime = 0;
         }
     }
 
@@ -44,6 +45,6 @@ public class VibrateObject : MonoBehaviour
     {
         _originPosition = transform.position;
         _originRotation = transform.rotation;
-        tempShakeIntensity = shakeIntensity;
+        tempShakeTime = shakeTime;
     }
 }

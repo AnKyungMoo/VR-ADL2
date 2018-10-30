@@ -6,6 +6,7 @@ using UnityEngine;
 public class ControllerGrabObject : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioSource _receiverAudio = null;
     [SerializeField] private VibrateObject _vibrateObject = null;
 
     private SteamVR_TrackedObject trackedObj;
@@ -98,6 +99,7 @@ public class ControllerGrabObject : MonoBehaviour
                 if (collidingObject.name.Equals("Receiver"))
                 {
                     _audioSource.Stop();
+                    _receiverAudio.Play();
                 }
                 GrabObject();
             }

@@ -13,6 +13,7 @@ namespace Managers
 
         public const string DirectoryMusic = @"/Resources/Musics/";
         public const string ExtensionMusic = @".mp3";
+        private bool _loadFlag = false;
 
         private struct SoundExtender
         {
@@ -40,14 +41,24 @@ namespace Managers
             StartCoroutine(LoadSoundCoroutine());
         }
 
+        private IEnumerator LoadCoroutine()
+        {
+            while (!_loadFlag)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            SoundManager.GetInstance.Initialize();
+        }
+
         private IEnumerator LoadSoundCoroutine()
         {
             // 사용하는 백그라운드 뮤직들에 대한 리스트
             var soundExtenders = new List<SoundExtender>
             {
-                new SoundExtender("washing_complete", 1f),
-                new SoundExtender("ring", 1f),
-                new SoundExtender("IU", 1f)
+                new SoundExtender("washing_complete", 1.0f),
+                new SoundExtender("ring", 1.0f),
+                new SoundExtender("IU", 1.0f)
             };
 
             // 각각의 뮤직 파일들을 차례차례 리스트에 로드
@@ -79,6 +90,7 @@ namespace Managers
                 }
             }
 
+            _loadFlag = true;
             yield return null;
         }
 

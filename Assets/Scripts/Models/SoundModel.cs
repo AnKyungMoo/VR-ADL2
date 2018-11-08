@@ -6,19 +6,19 @@ namespace Models
 {
     public class SoundModel : MonoBehaviour
     {
-        private AudioClip _audioClip;
-        private float _spatialBlend;
+        public AudioClip AudioClip { get; private set; }
+        public float SpatialBlend { get; private set; }
 
         public SoundModel()
         {
-            _audioClip = null;
-            _spatialBlend = 1.0f;
+            AudioClip = null;
+            SpatialBlend = 1.0f;
         }
 
         public SoundModel(AudioClip audioClip, float spatialBlend)
         {
-            _audioClip = audioClip;
-            _spatialBlend = spatialBlend;
+            this.AudioClip = audioClip;
+            this.SpatialBlend = spatialBlend;
         }
     }
 }
